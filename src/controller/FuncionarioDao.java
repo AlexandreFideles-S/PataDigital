@@ -1,42 +1,27 @@
 package controller;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-
 public class FuncionarioDao extends ConectarDao {
-    String sql;
-    PreparedStatement ps;
-    public FuncionarioDao() { super(); }
-    public void criarBanco() {
-    try { 
-        sql = "CREATE TABLE IF NOT EXISTS TB_FUNCIONARIO (ID_FUNCIONARIO int not null,"
-        + "primary key(ID_FUNCIONARIO) ) ";
-        ps = con.prepareStatement(sql);
-        ps.execute();
-        
-        sql = "CREATE TABLE IF NOT EXISTS FUNCIONARIO ("
-        + "ID_FUNCIONARIO int not null, "
-        + "DS_NOME varchar(100) not null ,"
-        + "DS_CPF varchar(100) not null ,"
-        + "TG_INATIVO boolean not null ,"
-        + "DS_CELULAR varchar(100) not null ,"
-        + "DS_TELEFONE varchar(100) not null ,"
-        + "DS_EMAIL varchar(100) not null ,"
-        + "DS_LOGIN varchar(100) not null ,"
-        + "DS_SENHA varchar(100) not null ,"
-        + "DS_PERMISSAO varchar(100) not null ,"
-        + "FK_ENDERECO int not null ,"
-        + "primary key (ID_FORMA_PAGAMENTO) )";
-        ps = con.prepareStatement(sql);
-        ps.execute();
-        ps.close();
-        con.close();
-        JOptionPane.showMessageDialog(null, "Banco criado com sucesso...");
-    } 
-    catch (SQLException err) {
-    JOptionPane.showMessageDialog(null, "Erro ao criar banco de dados " + err.getMessage() );
-    }}
+    private String sql;
     
+    public FuncionarioDao(){
+        super();
+    } 
+    
+    public ResultSet validarLogin (String login, String senha){
+        sql = "SELECT * FROM TB_FUNCIONARIO FUN LEFT JOIN TB_ENDERECO END ON END.ID_ENDERECO = FUN.FK_ENDERECO WHERE FUN.DS_LOGIN='" + login + "' AND FUN.DS_SENHA = '" + senha + "'";
+        
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet resul = ps.executeQuery();
+            return resul;
+        } catch(SQLException err){
+            JOptionPane.showMessageDialog(null, err.getMessage());
+            return null;
+        }
+    }
 }

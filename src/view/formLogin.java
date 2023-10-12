@@ -4,18 +4,22 @@
  */
 package view;
 
+import controller.ClienteDao;
+import controller.FuncionarioDao;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author vitor
  */
-public class formLogin extends javax.swing.JFrame {
+public class FormLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form formLogin
      */
-    public formLogin() {
+    public FormLogin() {
         initComponents();
     }
 
@@ -36,9 +40,11 @@ public class formLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblCadastroUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(20, 205, 194));
 
         txtLogin.setToolTipText("Digite o Login");
 
@@ -70,12 +76,11 @@ public class formLogin extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("PataDigital");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(51, 153, 255));
-        jLabel4.setText("Fazer cadastro");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblCadastroUsuario.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        lblCadastroUsuario.setText("Fazer cadastro");
+        lblCadastroUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                lblCadastroUsuarioMouseClicked(evt);
             }
         });
 
@@ -83,14 +88,9 @@ public class formLogin extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(153, 153, 153)
-                .addComponent(jLabel3)
-                .addContainerGap(162, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -101,6 +101,15 @@ public class formLogin extends javax.swing.JFrame {
                         .addComponent(txtLogin)
                         .addComponent(txtSenha)))
                 .addGap(41, 41, 41))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblCadastroUsuario)))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,9 +128,9 @@ public class formLogin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
                     .addComponent(btnLimpar))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(21, 21, 21))
+                .addGap(33, 33, 33)
+                .addComponent(lblCadastroUsuario)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -138,24 +147,47 @@ public class formLogin extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    private boolean checarSenhaELogin(){
+    private int checarSenhaELogin(){
         String login = this.txtLogin.getText();
         String senha = this.txtSenha.getText();
-
-        if(!login.equals("admin") || !senha.equals("1234")){
-
-            JOptionPane.showMessageDialog(null,"Login ou senha invalidos", "Erro de Operação",
-                JOptionPane.WARNING_MESSAGE);
-
-            this.txtLogin.requestFocus();//coloca o cursor no campo login
-            return false;
+        
+        if(login.equals("admin") || senha.equals("1234")){
+            return 1;
         }
-        return true;
+        
+        ClienteDao clienteDao = new ClienteDao();
+        FuncionarioDao funcionarioDao = new FuncionarioDao();
+        
+        try{
+            ResultSet resulCliente = clienteDao.validarLogin(login, senha);
+            ResultSet resulFuncionario = funcionarioDao.validarLogin(login, senha);
+            if(resulCliente.next()){
+                return 2;
+            } else if(resulFuncionario.next()){
+                return 3;
+            }
+        }catch (SQLException err){
+            JOptionPane.showMessageDialog(null,err.getMessage());
+        }
+
+        JOptionPane.showMessageDialog(null,"Login ou senha invalidos", "Erro de Operação",JOptionPane.WARNING_MESSAGE);
+        
+        return -1;
     }
     
+    private void abrirFormFuncionario(){
+        //COLOCAR CODIGO PARA ABRIR FORM DO FUNCIONARIO
+    }
+        
     private void abrirFormCadastroCliente(){
-        formCadastroCliente objFormFuncionario = new formCadastroCliente();
+        FormCadastroCliente objFormFuncionario = new FormCadastroCliente();
         objFormFuncionario.setVisible(true);
+        this.setVisible(false);
+    }
+    
+    private void abrirFormAdminGerente(){
+        FormAdminGerente objFormAdminGerente = new FormAdminGerente();
+        objFormAdminGerente.setVisible(true);
         this.setVisible(false);
     }
     
@@ -163,15 +195,31 @@ public class formLogin extends javax.swing.JFrame {
         int codeKeyPress = evt.getKeyCode();
 
         if(codeKeyPress == 10){
-            if(this.checarSenhaELogin()){
-                this.abrirFormCadastroCliente();
+            switch(this.checarSenhaELogin()){
+                case 1:
+                    this.abrirFormAdminGerente();;
+                break;
+                case 2:
+                    this.abrirFormFuncionario();;
+                break;
+                case 3:
+                    this.abrirFormCadastroCliente();
+                break;
             }
         }
     }//GEN-LAST:event_txtSenhaKeyPressed
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-        if(this.checarSenhaELogin()){
-            this.abrirFormCadastroCliente();
+        switch(this.checarSenhaELogin()){
+            case 1:
+                this.abrirFormAdminGerente();;
+            break;
+            case 2:
+                this.abrirFormFuncionario();;
+            break;
+            case 3:
+                this.abrirFormCadastroCliente();
+            break;
         }
     }//GEN-LAST:event_btnLoginMouseClicked
 
@@ -181,9 +229,9 @@ public class formLogin extends javax.swing.JFrame {
         this.txtLogin.requestFocus();
     }//GEN-LAST:event_btnLimparMouseClicked
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    private void lblCadastroUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCadastroUsuarioMouseClicked
         this.abrirFormCadastroCliente();
-    }//GEN-LAST:event_jLabel4MouseClicked
+    }//GEN-LAST:event_lblCadastroUsuarioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -202,20 +250,21 @@ public class formLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(formLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(formLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(formLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(formLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new formLogin().setVisible(true);
+                new FormLogin().setVisible(true);
             }
         });
     }
@@ -226,8 +275,8 @@ public class formLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblCadastroUsuario;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables

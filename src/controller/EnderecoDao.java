@@ -1,41 +1,41 @@
 package controller;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-
+import model.Endereco;
 
 public class EnderecoDao extends ConectarDao {
-    String sql;
-    PreparedStatement ps;
-    public EnderecoDao() { super(); }
-    public void criarBanco() {
-    try { 
-        sql = "CREATE TABLE IF NOT EXISTS TB_ENDERECO (ID_ENDERECO int not null,"
-        + "primary key(ID_ENDERECO) ) ";
-        ps = con.prepareStatement(sql);
-        ps.execute();
-        
-        sql = "CREATE TABLE IF NOT EXISTS ENDERECO ("
-        + "ID_ENDERECO int not null, "
-        + "DS_LOGRADOURO varchar(100) not null ,"
-        + "DS_BAIRRO varchar(100) not null ,"
-        + "DS_NUMERO varchar(100) not null ,"
-        + "DS_COMPLEMENTO varchar(100) not null ,"
-        + "DS_CEP varchar(100) not null ,"
-        + "DS_CIDADE varchar(100) not null ,"
-        + "DS_ESTADO varchar(100) not null ,"
-        + "DS_PAIS varchar(100) not null ,"
-        + "DS_UF varchar(100) not null ,"
-        + "primary key (ID_ENDERECO) )";
-        ps = con.prepareStatement(sql);
-        ps.execute();
-        ps.close();
-        con.close();
-        JOptionPane.showMessageDialog(null, "Banco criado com sucesso...");
-    } 
-    catch (SQLException err) {
-    JOptionPane.showMessageDialog(null, "Erro ao criar banco de dados " + err.getMessage() );
-    }}
+    private String sql;
     
+    public EnderecoDao(){
+        super();
+    }
+    
+    public ResultSet incluir(Endereco obj){
+        sql = "INSERT INTO TB_ENDERECO (DS_LOGRADOURO, DS_BAIRRO, DS_NUMERO, DS_COMPLEMENTO, DS_CEP, DS_CIDADE, DS_ESTADO, DS_PAIS, DS_UF)" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1,obj.getDS_LOGRADOURO());
+            ps.setString(2,obj.getDS_BAIRRO());
+            ps.setString(3, obj.getDS_NUMERO());
+            ps.setString(4,obj.getDS_COMPLEMENTO());
+            ps.setString(5,obj.getDS_CEP());
+            ps.setString(6,obj.getDS_CIDADE());
+            ps.setString(7,obj.getDS_ESTADO());
+            ps.setString(8,obj.getDS_PAIS());
+            ps.setString(9,obj.getDS_UF());
+
+            ResultSet resul = ps.executeQuery();
+            return resul;
+        }catch(SQLException err){
+            JOptionPane.showMessageDialog(null, "Erro ao incluir usuário! " + err.getMessage());
+        }
+        
+        return null;
+    }
 }
