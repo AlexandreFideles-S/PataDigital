@@ -33,6 +33,12 @@ public class ConectarDao {
         this.criarTabelaAtendimento();
         this.criarTabelaVendaProduto();
         this.criarTabelaAtendimentoServico();
+        
+        try{
+            con.close();
+        } catch(SQLException err) {
+            JOptionPane.showMessageDialog(null, "Erro ao fechar conexão com o banco de dados " + err.getMessage() );
+        }
     }
     
     private void criarTabelaServico() {
