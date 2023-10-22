@@ -69,7 +69,7 @@ public class FormLogin extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Login:");
+        jLabel1.setText("Email/Login:");
 
         jLabel2.setText("Senha:");
 
@@ -155,18 +155,19 @@ public class FormLogin extends javax.swing.JFrame {
             return 1;
         }
         
-        ClienteDao clienteDao = new ClienteDao();
-        FuncionarioDao funcionarioDao = new FuncionarioDao();
         
         try{
+            ClienteDao clienteDao = new ClienteDao();
             ResultSet resulCliente = clienteDao.validarLogin(login, senha);
+            
+            FuncionarioDao funcionarioDao = new FuncionarioDao();
             ResultSet resulFuncionario = funcionarioDao.validarLogin(login, senha);
             if(resulCliente.next()){
                 return 2;
             } else if(resulFuncionario.next()){
                 return 3;
             }
-        }catch (SQLException err){
+        } catch (SQLException err){
             JOptionPane.showMessageDialog(null,err.getMessage());
         }
 

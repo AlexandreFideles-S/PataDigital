@@ -15,7 +15,9 @@ public class ClienteDao extends ConectarDao {
     }
     
     public ResultSet validarLogin (String login, String senha){
-        sql = "SELECT * FROM TB_CLIENTE CLI LEFT JOIN TB_ENDERECO END ON END.ID_ENDERECO = CLI.FK_ENDERECO WHERE CLI.DS_EMAIL='" + login + "' AND CLI.DS_SENHA = '" + senha + "'";
+        sql = "SELECT * FROM TB_CLIENTE CLI "
+                + "LEFT JOIN TB_ENDERECO END ON END.FK_CLIENTE = CLI.ID_CLIENTE "
+                + "WHERE CLI.DS_EMAIL='" + login + "' AND CLI.DS_SENHA = '" + senha + "'";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql);
@@ -28,8 +30,8 @@ public class ClienteDao extends ConectarDao {
     }
     
     public ResultSet incluir(Cliente obj){
-        sql = "INSERT INTO TB_CLIENTE (DS_NOME, DS_CPF, DT_NASCIMENTO, DS_CELULAR, DS_TELEFONE, DS_EMAIL, DS_SENHA, FK_ENDERECO) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        sql = "INSERT INTO TB_CLIENTE (DS_NOME, DS_CPF, DT_NASCIMENTO, DS_CELULAR, DS_TELEFONE, DS_EMAIL, DS_SENHA) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?);";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql);
@@ -39,14 +41,40 @@ public class ClienteDao extends ConectarDao {
             ps.setString(4,obj.getDS_CELULAR());
             ps.setString(5,obj.getDS_TELEFONE());
             ps.setString(6,obj.getDS_SENHA());
-            ps.setInt(7,obj.getFK_ENDERECO());
             
             ResultSet resul = ps.executeQuery();
             return resul;
-        }catch(SQLException err){
+        } catch(SQLException err){
             JOptionPane.showMessageDialog(null, "Erro ao incluir usuário! " + err.getMessage());
         }
         
         return null;
+    }
+    
+    public ResultSet buscarClienteByCpf(String cpf) {
+        sql = "SELECT * FROM TB_CLIENTE WHERE DS_CPF = ?";
+
+        try{        
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, cpf);
+            
+            return ps.executeQuery();
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar usuário!" + err.getMessage());
+            return null;
+        }
+    }
+    
+    public ResultSet buscarTodosClientes() {
+        sql = "SELECT * FROM TB_CLIENTE ORDER BY DS_NOME";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            return ps.executeQuery();
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar usuário! " + err.getMessage());
+            return null;
+        }
     }
 }

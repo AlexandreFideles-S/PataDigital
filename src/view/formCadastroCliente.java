@@ -343,6 +343,7 @@ public class FormCadastroCliente extends javax.swing.JFrame {
         cliente.setDS_NOME(this.txtNome.getText());
         cliente.setDS_SENHA(this.txtSenha.getText());
         cliente.setDS_TELEFONE(this.txtTelefone.getText());
+        
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date dataFormatada; 
         try {
@@ -364,19 +365,28 @@ public class FormCadastroCliente extends javax.swing.JFrame {
         endereco.setDS_PAIS(this.txtPais.getText());
         endereco.setDS_UF(this.txtUf.getText());
         
-        EnderecoDao enderecoDao = new EnderecoDao();
-        
         try{
-            ResultSet resulEndereco = enderecoDao.incluir(endereco);
-            if(!resulEndereco.next()){
-                cliente.setFK_ENDERECO(resulEndereco.getInt(1));
-            }
             ClienteDao clienteDao = new ClienteDao();
+            
+            ResultSet resulBuscaCliente = clienteDao.buscarClienteByCpf(cliente.getDS_CPF());
+            
+            if(resulBuscaCliente.next()){
+                JOptionPane.showMessageDialog(null,"Já existe um cliente com o mesmo CPF cadastrado");
+                return;
+            }
+            
             ResultSet resulCliente = clienteDao.incluir(cliente);
+            
+            if(resulCliente.next()){
+                endereco.setFK_CLIENTE(resulCliente.getInt("ID_CLIENTE"));
+                
+                EnderecoDao enderecoDao = new EnderecoDao();
+                
+                ResultSet resulEndereco = enderecoDao.incluir(endereco);
+            }
         }catch (SQLException err){
             JOptionPane.showMessageDialog(null,err.getMessage());
         }
-        
     }//GEN-LAST:event_btnInserirCadastroClienteMouseClicked
 
     /**

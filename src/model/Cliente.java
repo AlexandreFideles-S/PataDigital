@@ -7,11 +7,11 @@ public class Cliente {
     private String DS_NOME;
     private String DS_CPF;
     private Date DT_NASCIMENTO;
-     private String DS_CELULAR;
-     private String DS_TELEFONE;
+    private String DS_CELULAR;
+    private String DS_TELEFONE;
     private String DS_EMAIL;
     private String DS_SENHA;
-    private int FK_ENDERECO;
+    private Endereco Endereco;
 
     public int getID_CLIENTE() {
         return ID_CLIENTE;
@@ -76,14 +76,12 @@ public class Cliente {
     public void setDS_SENHA(String DS_SENHA) {
         this.DS_SENHA = DS_SENHA;
     }
-
-    public int getFK_ENDERECO() {
-        return FK_ENDERECO;
+    
+    public Endereco getEndereco() {
+        return Endereco;
     }
 
-    public void setFK_ENDERECO(int FK_ENDERECO) {
-        this.FK_ENDERECO = FK_ENDERECO;
+    public void setEndereco(Endereco Endereco) {
+        this.Endereco = Endereco;
     }
-    
-    
 }

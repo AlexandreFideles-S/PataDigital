@@ -19,6 +19,8 @@ public class Endereco {
     private String DS_ESTADO;
     private String DS_PAIS;
     private String DS_UF;
+    private int FK_CLIENTE;
+    private int FK_FUNCIONARIO;
 
     public int getID_ENDERECO() {
         return ID_ENDERECO;
@@ -100,4 +102,19 @@ public class Endereco {
         this.DS_UF = DS_UF;
     }
     
+    public int getFK_CLIENTE() {
+        return FK_CLIENTE;
+    }
+
+    public void setFK_CLIENTE(int FK_CLIENTE) {
+        this.FK_CLIENTE = FK_CLIENTE;
+    }
+    
+    public int getFK_FUNCIONARIO() {
+        return FK_FUNCIONARIO;
+    }
+
+    public void setFK_FUNCIONARIO(int FK_FUNCIONARIO) {
+        this.FK_FUNCIONARIO = FK_FUNCIONARIO;
+    }
 }

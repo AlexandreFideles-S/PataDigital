@@ -1,6 +1,5 @@
 package controller;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,10 +31,38 @@ public class EnderecoDao extends ConectarDao {
 
             ResultSet resul = ps.executeQuery();
             return resul;
-        }catch(SQLException err){
+        } catch(SQLException err){
             JOptionPane.showMessageDialog(null, "Erro ao incluir usuário! " + err.getMessage());
         }
         
         return null;
+    }
+    
+    public ResultSet buscarEnderecoByIdCliente(int idCliente) {
+        sql = "SELECT * FROM TB_ENDERECO WHERE FK_CLIENTE = ?";
+
+        try{        
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idCliente);
+            
+            return ps.executeQuery();
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar usuário!" + err.getMessage());
+            return null;
+        }
+    }
+    
+    public ResultSet buscarEnderecoByIdFuncionario(int idFuncionario) {
+        sql = "SELECT * FROM TB_ENDERECO WHERE FK_FUNCIONARIO = ?";
+
+        try{        
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idFuncionario);
+            
+            return ps.executeQuery();
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar usuário!" + err.getMessage());
+            return null;
+        }
     }
 }
