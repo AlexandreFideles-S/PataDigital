@@ -13,7 +13,9 @@ public class FuncionarioDao extends ConectarDao {
     } 
     
     public ResultSet validarLogin (String login, String senha){
-        sql = "SELECT * FROM TB_FUNCIONARIO FUN LEFT JOIN TB_ENDERECO END ON END.ID_ENDERECO = FUN.FK_ENDERECO WHERE FUN.DS_LOGIN='" + login + "' AND FUN.DS_SENHA = '" + senha + "'";
+        sql = "SELECT * FROM TB_FUNCIONARIO FUN "
+                + "LEFT JOIN TB_ENDERECO END ON END.FK_FUNCIONARIO = FUN.ID_FUNCIONARIO "
+                + "WHERE FUN.DS_LOGIN='" + login + "' AND FUN.DS_SENHA = '" + senha + "'";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql);

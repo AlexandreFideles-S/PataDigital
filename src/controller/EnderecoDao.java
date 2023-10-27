@@ -13,9 +13,9 @@ public class EnderecoDao extends ConectarDao {
         super();
     }
     
-    public ResultSet incluir(Endereco obj){
-        sql = "INSERT INTO TB_ENDERECO (DS_LOGRADOURO, DS_BAIRRO, DS_NUMERO, DS_COMPLEMENTO, DS_CEP, DS_CIDADE, DS_ESTADO, DS_PAIS, DS_UF)" +
-                " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    public void incluirEnderecoCliente(Endereco obj){
+        sql = "INSERT INTO TB_ENDERECO (DS_LOGRADOURO, DS_BAIRRO, DS_NUMERO, DS_COMPLEMENTO, DS_CEP, DS_CIDADE, DS_ESTADO, DS_PAIS, DS_UF, FK_CLIENTE)" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql);
@@ -28,14 +28,12 @@ public class EnderecoDao extends ConectarDao {
             ps.setString(7,obj.getDS_ESTADO());
             ps.setString(8,obj.getDS_PAIS());
             ps.setString(9,obj.getDS_UF());
+            ps.setInt(10,obj.getFK_CLIENTE());
 
-            ResultSet resul = ps.executeQuery();
-            return resul;
+            ps.execute();
         } catch(SQLException err){
             JOptionPane.showMessageDialog(null, "Erro ao incluir usuário! " + err.getMessage());
         }
-        
-        return null;
     }
     
     public ResultSet buscarEnderecoByIdCliente(int idCliente) {

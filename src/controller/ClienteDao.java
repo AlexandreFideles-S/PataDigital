@@ -29,7 +29,7 @@ public class ClienteDao extends ConectarDao {
         }
     }
     
-    public ResultSet incluir(Cliente obj){
+    public void incluir(Cliente obj){
         sql = "INSERT INTO TB_CLIENTE (DS_NOME, DS_CPF, DT_NASCIMENTO, DS_CELULAR, DS_TELEFONE, DS_EMAIL, DS_SENHA) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?);";
         
@@ -37,18 +37,16 @@ public class ClienteDao extends ConectarDao {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1,obj.getDS_NOME());
             ps.setString(2,obj.getDS_CPF());
-            ps.setDate(3, (Date) obj.getDT_NASCIMENTO());
+            ps.setDate(3,  new java.sql.Date(obj.getDT_NASCIMENTO().getTime()));
             ps.setString(4,obj.getDS_CELULAR());
             ps.setString(5,obj.getDS_TELEFONE());
-            ps.setString(6,obj.getDS_SENHA());
+            ps.setString(6,obj.getDS_EMAIL());
+            ps.setString(7,obj.getDS_SENHA());
             
-            ResultSet resul = ps.executeQuery();
-            return resul;
+            ps.execute();
         } catch(SQLException err){
             JOptionPane.showMessageDialog(null, "Erro ao incluir usuário! " + err.getMessage());
         }
-        
-        return null;
     }
     
     public ResultSet buscarClienteByCpf(String cpf) {

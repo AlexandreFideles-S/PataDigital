@@ -36,6 +36,7 @@ public class ConectarDao {
         
         try{
             con.close();
+            JOptionPane.showMessageDialog(null, "Banco de dados criado com sucesso!");
         } catch(SQLException err) {
             JOptionPane.showMessageDialog(null, "Erro ao fechar conexão com o banco de dados " + err.getMessage() );
         }
@@ -70,11 +71,7 @@ public class ConectarDao {
                     "    `FK_FORMA_PAGAMENTO` INT NOT NULL," +
                     "    `VL_TOTAL` DECIMAL(8, 2) NOT NULL," +
                     "    `DH_ATENDIMENTO` DATETIME NOT NULL," +
-                    "    `DS_CANCELAMENTO` VARCHAR(255) NOT NULL," +
-                    "	CONSTRAINT `tb_atendimento_fk_pet_foreign` FOREIGN KEY(`FK_PET`) REFERENCES `TB_PET`(`ID_PET`)," +
-                    "	CONSTRAINT `tb_atendimento_fk_funcionario_foreign` FOREIGN KEY(`FK_FUNCIONARIO`) REFERENCES `TB_FUNCIONARIO`(`ID_FUNCIONARIO`)," +
-                    "	CONSTRAINT `tb_atendimento_fk_cliente_foreign` FOREIGN KEY(`FK_CLIENTE`) REFERENCES `TB_CLIENTE`(`ID_CLIENTE`)," +
-                    "	CONSTRAINT `tb_atendimento_fk_forma_pagamento_foreign` FOREIGN KEY(`FK_FORMA_PAGAMENTO`) REFERENCES `TB_FORMA_PAGAMENTO`(`ID_FORMA_PAGAMENTO`)" +
+                    "    `DS_CANCELAMENTO` VARCHAR(255) NULL"+
                     ");";
             
             PreparedStatement ps = con.prepareStatement(sql);
@@ -92,9 +89,7 @@ public class ConectarDao {
                     "    `ID_VENDA_PRODUTO` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY," +
                     "    `FK_PRODUTO` INT NOT NULL," +
                     "    `FK_VENDA` INT NOT NULL," +
-                    "    `QT_PRODUTO` INT NOT NULL," +
-                    "	CONSTRAINT `tb_venda_produto_fk_produto_foreign` FOREIGN KEY(`FK_PRODUTO`) REFERENCES `TB_PRODUTO`(`ID_PRODUTO`)," +
-                    "	CONSTRAINT `tb_venda_produto_fk_venda_foreign` FOREIGN KEY(`FK_VENDA`) REFERENCES `TB_VENDA`(`ID_VENDA`)" +
+                    "    `QT_PRODUTO` INT NOT NULL" +
                     ");";
             
             PreparedStatement ps = con.prepareStatement(sql);
@@ -130,16 +125,14 @@ public class ConectarDao {
                     "    `DS_LOGRADOURO` VARCHAR(255) NOT NULL," +
                     "    `DS_BAIRRO` VARCHAR(255) NOT NULL," +
                     "    `DS_NUMERO` VARCHAR(255) NOT NULL," +
-                    "    `DS_COMPLEMENTO` VARCHAR(255) NOT NULL," +
+                    "    `DS_COMPLEMENTO` VARCHAR(255) NULL," +
                     "    `DS_CEP` VARCHAR(255) NOT NULL," +
                     "    `DS_CIDADE` VARCHAR(255) NOT NULL," +
                     "    `DS_ESTADO` VARCHAR(255) NOT NULL," +
                     "    `DS_PAIS` VARCHAR(255) NOT NULL," +
                     "    `DS_UF` VARCHAR(255) NOT NULL," +
                     "    `FK_CLIENTE` INT NULL," +
-                    "    `FK_FUNCIONARIO` INT NULL," +
-                    "	CONSTRAINT `tb_endereco_fk_cliente_foreign` FOREIGN KEY(`FK_CLIENTE`) REFERENCES `TB_CLIENTE`(`ID_CLIENTE`)," +
-                    "	CONSTRAINT `tb_endereco_fk_funcionario_foreign` FOREIGN KEY(`FK_FUNCIONARIO`) REFERENCES `TB_FUNCIONARIO`(`ID_FUNCIONARIO`)" +
+                    "    `FK_FUNCIONARIO` INT NULL" +
                     ");";
             
             PreparedStatement ps = con.prepareStatement(sql);
@@ -179,10 +172,7 @@ public class ConectarDao {
                     "    `FK_FORMA_PAGAMENTO` INT NOT NULL," +
                     "    `FK_CLIENTE` INT NOT NULL," +
                     "    `VL_TOTAL` DECIMAL(8, 2) NOT NULL," +
-                    "    `DH_VENDA` DATETIME NOT NULL," +
-                    "	CONSTRAINT `tb_venda_fk_forma_pagamento_foreign` FOREIGN KEY(`FK_FORMA_PAGAMENTO`) REFERENCES `TB_FORMA_PAGAMENTO`(`ID_FORMA_PAGAMENTO`)," +
-                    "	CONSTRAINT `tb_venda_fk_cliente_foreign` FOREIGN KEY(`FK_CLIENTE`) REFERENCES `TB_CLIENTE`(`ID_CLIENTE`)," +
-                    "	CONSTRAINT `tb_venda_fk_funcionario_foreign` FOREIGN KEY(`FK_FUNCIONARIO`) REFERENCES `TB_FUNCIONARIO`(`ID_FUNCIONARIO`)" +
+                    "    `DH_VENDA` DATETIME NOT NULL" +
                     ");";
             
             PreparedStatement ps = con.prepareStatement(sql);
@@ -262,9 +252,7 @@ public class ConectarDao {
             sql = "CREATE TABLE IF NOT EXISTS `TB_ATENDIMENTO_SERVICO`(" +
                     "    `ID_ATENDIMENTO_SERVICO` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY," +
                     "    `FK_ATENDIMENTO` INT NOT NULL," +
-                    "    `FK_SERVICO` INT NOT NULL," +
-                    "	CONSTRAINT `tb_atendimento_servico_fk_servico_foreign` FOREIGN KEY(`FK_SERVICO`) REFERENCES `TB_SERVICO`(`ID_SERVICO`)," +
-                    "	CONSTRAINT `tb_atendimento_servico_fk_atendimento_foreign` FOREIGN KEY(`FK_ATENDIMENTO`) REFERENCES `TB_ATENDIMENTO`(`ID_AGENDAMENTO`)" +
+                    "    `FK_SERVICO` INT NOT NULL" +
                     ");";
             
             PreparedStatement ps = con.prepareStatement(sql);
@@ -281,11 +269,9 @@ public class ConectarDao {
             sql = "CREATE TABLE IF NOT EXISTS `TB_PET`(" +
                     "    `ID_PET` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY," +
                     "    `DS_NOME` VARCHAR(255) NOT NULL," +
-                    "    `DT_NASCIMENTO` DATE NOT NULL," +
+                    "    `DT_NASCIMENTO` DATE NULL," +
                     "    `FK_RACA` INT NOT NULL," +
-                    "    `FK_CLIENTE` INT NOT NULL," +
-                    "	CONSTRAINT `tb_pet_fk_cliente_foreign` FOREIGN KEY(`FK_CLIENTE`) REFERENCES `TB_CLIENTE`(`ID_CLIENTE`)," +
-                    "	CONSTRAINT `tb_pet_fk_raca_foreign` FOREIGN KEY(`FK_RACA`) REFERENCES `TB_RACA`(`ID_RACA`)" +
+                    "    `FK_CLIENTE` INT NOT NULL" +
                     ");";
             
             PreparedStatement ps = con.prepareStatement(sql);

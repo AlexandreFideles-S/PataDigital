@@ -222,12 +222,9 @@ public class FormCadastroCliente extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -335,6 +332,12 @@ public class FormCadastroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnInserirCadastroClienteActionPerformed
 
+    private void abrirFormLogin(){
+        FormLogin objFormLogin = new FormLogin();
+        objFormLogin.setVisible(true);
+        this.setVisible(false);
+    }
+    
     private void btnInserirCadastroClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInserirCadastroClienteMouseClicked
         Cliente cliente = new Cliente();
         cliente.setDS_CELULAR(this.txtCelular.getText());
@@ -375,14 +378,20 @@ public class FormCadastroCliente extends javax.swing.JFrame {
                 return;
             }
             
-            ResultSet resulCliente = clienteDao.incluir(cliente);
+            clienteDao.incluir(cliente);
+            ResultSet resulCliente = clienteDao.buscarClienteByCpf(cliente.getDS_CPF());
             
             if(resulCliente.next()){
                 endereco.setFK_CLIENTE(resulCliente.getInt("ID_CLIENTE"));
                 
                 EnderecoDao enderecoDao = new EnderecoDao();
                 
-                ResultSet resulEndereco = enderecoDao.incluir(endereco);
+                enderecoDao.incluirEnderecoCliente(endereco);
+                
+                JOptionPane.showMessageDialog(null,"Usuário inserido com sucesso.");
+                this.abrirFormLogin();
+            } else{
+                JOptionPane.showMessageDialog(null,"Id de usuário inválido, ou não encontrado.");
             }
         }catch (SQLException err){
             JOptionPane.showMessageDialog(null,err.getMessage());

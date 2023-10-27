@@ -151,7 +151,7 @@ public class FormLogin extends javax.swing.JFrame {
         String login = this.txtLogin.getText();
         String senha = this.txtSenha.getText();
         
-        if(login.equals("admin") || senha.equals("1234")){
+        if(login.equals("admin") && senha.equals("1234")){
             return 1;
         }
         
@@ -159,12 +159,13 @@ public class FormLogin extends javax.swing.JFrame {
         try{
             ClienteDao clienteDao = new ClienteDao();
             ResultSet resulCliente = clienteDao.validarLogin(login, senha);
+            if(resulCliente.next()){
+                return 2;
+            }
             
             FuncionarioDao funcionarioDao = new FuncionarioDao();
             ResultSet resulFuncionario = funcionarioDao.validarLogin(login, senha);
-            if(resulCliente.next()){
-                return 2;
-            } else if(resulFuncionario.next()){
+            if(resulFuncionario.next()){
                 return 3;
             }
         } catch (SQLException err){
@@ -175,9 +176,15 @@ public class FormLogin extends javax.swing.JFrame {
         
         return -1;
     }
-    
-    private void abrirFormFuncionario(){
+    private void abrirFormClienteInicio(){
+        FormClienteInicio objFormClienteInicio = new FormClienteInicio();
+        objFormClienteInicio.setVisible(true);
+        this.setVisible(false);        
+    }
+        
+    private void abrirFormFuncionarioInicio(){
         //COLOCAR CODIGO PARA ABRIR FORM DO FUNCIONARIO
+        JOptionPane.showMessageDialog(null,"Login funcionario feito");
     }
         
     private void abrirFormCadastroCliente(){
@@ -201,9 +208,12 @@ public class FormLogin extends javax.swing.JFrame {
                     this.abrirFormAdminGerente();;
                 break;
                 case 2:
-                    this.abrirFormFuncionario();;
+                    this.abrirFormClienteInicio();;
                 break;
                 case 3:
+                    this.abrirFormFuncionarioInicio();;
+                break;
+                case 4:
                     this.abrirFormCadastroCliente();
                 break;
             }
@@ -216,9 +226,12 @@ public class FormLogin extends javax.swing.JFrame {
                 this.abrirFormAdminGerente();;
             break;
             case 2:
-                this.abrirFormFuncionario();;
+                this.abrirFormClienteInicio();;
             break;
             case 3:
+                this.abrirFormFuncionarioInicio();;
+            break;
+            case 4:
                 this.abrirFormCadastroCliente();
             break;
         }
