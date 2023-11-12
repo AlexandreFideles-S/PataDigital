@@ -264,6 +264,7 @@ public class ConectarDao {
         }
     }
     
+    
     private void criarTabelaPet() {
         try { 
             sql = "CREATE TABLE IF NOT EXISTS `TB_PET`(" +
