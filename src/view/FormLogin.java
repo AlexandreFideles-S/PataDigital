@@ -197,9 +197,9 @@ public class FormLogin extends javax.swing.JFrame {
         return -1;
     }
     private void abrirFormTelaInicio(){
-        FormTelaInicio objTelaClienteInicio = new FormTelaInicio();
-        objTelaClienteInicio.setVisible(true);
-        this.setVisible(false);        
+        FormTelaInicio objTelaInicio = new FormTelaInicio();
+        objTelaInicio.setVisible(true);
+        this.setVisible(false);       
     }
         
     private void abrirFormCadastroCliente(){
