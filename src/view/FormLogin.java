@@ -4,6 +4,7 @@
  */
 package view;
 
+
 import controller.FuncionarioDao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +21,7 @@ public class FormLogin extends javax.swing.JFrame {
      */
     public FormLogin() {
         initComponents();
+       
     }
 
     /**
@@ -39,7 +41,6 @@ public class FormLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        lblCadastroUsuario = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -82,15 +83,6 @@ public class FormLogin extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagns/WhatsApp Image 2023-10-28 at 20.40.04.jpeg"))); // NOI18N
 
-        lblCadastroUsuario.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        lblCadastroUsuario.setForeground(new java.awt.Color(0, 51, 204));
-        lblCadastroUsuario.setText("Fazer cadastro");
-        lblCadastroUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblCadastroUsuarioMouseClicked(evt);
-            }
-        });
-
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagns/73a79f34249842d29d6f5f78d45a9ee1_1.jpg"))); // NOI18N
@@ -126,9 +118,6 @@ public class FormLogin extends javax.swing.JFrame {
                         .addComponent(btnLimpar)
                         .addGap(20, 20, 20))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblCadastroUsuario)
-                        .addGap(65, 65, 65))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -154,8 +143,6 @@ public class FormLogin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
                     .addComponent(btnLimpar))
-                .addGap(18, 18, 18)
-                .addComponent(lblCadastroUsuario)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -230,14 +217,9 @@ public class FormLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSenhaKeyPressed
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-        switch(this.checarSenhaELogin()){
-                case 1:
-                    this.abrirFormAdminGerente();;
-                break;
-                case 2:
+
                     this.abrirFormTelaInicio();;
-                break;
-        }
+               
     }//GEN-LAST:event_btnLoginMouseClicked
 
     private void btnLimparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimparMouseClicked
@@ -245,10 +227,6 @@ public class FormLogin extends javax.swing.JFrame {
         this.txtSenha.setText("");
         this.txtLogin.requestFocus();
     }//GEN-LAST:event_btnLimparMouseClicked
-
-    private void lblCadastroUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCadastroUsuarioMouseClicked
-        this.abrirFormCadastroCliente();
-    }//GEN-LAST:event_lblCadastroUsuarioMouseClicked
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
@@ -299,7 +277,6 @@ public class FormLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lblCadastroUsuario;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables

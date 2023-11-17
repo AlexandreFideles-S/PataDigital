@@ -43,4 +43,33 @@ public class PetDao extends ConectarDao {
         }
     }
     
+    
+    public ResultSet buscartodosPets () {
+        
+        
+        // ResultSet buscar =  buscarPetsClientes ( this.txtCpf.getText() );
+        //  if ( buscar.next() )
+        // {}
+        //else
+        //{  mensagem "usuario não encontrado cliente não encontrao. "}
+        
+        
+        
+        
+        
+        
+        sql = "SELECT * FROM TB_PET order by nome ";
+        
+        try {
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            return ps.executeQuery();
+            
+            
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar usuário! " + err.getMessage());
+            return null;
+        }
+    }
+    
 }

@@ -14,7 +14,7 @@ public class ConectarDao {
         String strcon = "jdbc:mysql://localhost:3306/PataDigital";//cria a string de conexão ao servidor xaamp 
         try {
 
-            con = DriverManager.getConnection(strcon, "root", "");
+        con = DriverManager.getConnection(strcon, "root", "");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Conexão com Mysql não realizada!\n" + ex);
         }
@@ -34,12 +34,6 @@ public class ConectarDao {
         this.criarTabelaVendaProduto();
         this.criarTabelaAtendimentoServico();
         
-        try{
-            con.close();
-            JOptionPane.showMessageDialog(null, "Banco de dados criado com sucesso!");
-        } catch(SQLException err) {
-            JOptionPane.showMessageDialog(null, "Erro ao fechar conexão com o banco de dados " + err.getMessage() );
-        }
     }
     
     private void criarTabelaServico() {

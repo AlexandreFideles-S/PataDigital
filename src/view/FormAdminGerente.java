@@ -4,8 +4,8 @@
  */
 package view;
 
-import controller.ClienteDao;
-
+import controller.FuncionarioDao;
+import controller.ConectarDao;
 /**
  *
  * @author vitor
@@ -16,7 +16,7 @@ public class FormAdminGerente extends javax.swing.JFrame {
      * Creates new form FormAdminGerente
      */
     public FormAdminGerente() {
-        initComponents();
+        initComponents(); 
     }
 
     /**
@@ -47,6 +47,11 @@ public class FormAdminGerente extends javax.swing.JFrame {
 
         btnCadastrarFuncionario.setForeground(new java.awt.Color(0, 51, 255));
         btnCadastrarFuncionario.setText("Criar Funcionario");
+        btnCadastrarFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCadastrarFuncionarioMouseClicked(evt);
+            }
+        });
         btnCadastrarFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarFuncionarioActionPerformed(evt);
@@ -117,6 +122,13 @@ public class FormAdminGerente extends javax.swing.JFrame {
     private void btnCadastrarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFuncionarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCadastrarFuncionarioActionPerformed
+
+    private void btnCadastrarFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarFuncionarioMouseClicked
+
+        FormCadastoFuncionario objFormAdminGerente = new FormCadastoFuncionario();
+        objFormAdminGerente.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCadastrarFuncionarioMouseClicked
 
     /**
      * @param args the command line arguments
