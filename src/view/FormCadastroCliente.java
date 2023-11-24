@@ -102,7 +102,7 @@ public class FormCadastroCliente extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(20, 205, 194));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setText("Cadastro");
+        jLabel2.setText("Cadastro Cliente");
 
         jLabel1.setText("Nome:");
 

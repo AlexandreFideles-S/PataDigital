@@ -5,6 +5,7 @@
 package view;
 
 import controller.ClienteDao;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,16 +30,13 @@ public class FormTelaInicio extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        btnCadUsu = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        btnGerenciarUsu1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         btnSair = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
+        btnCadFun = new javax.swing.JButton();
         btnGerenciarPet = new javax.swing.JButton();
-        btnCadUsu1 = new javax.swing.JButton();
+        btnCadastrarPet1 = new javax.swing.JButton();
+        btnCadUsu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("InicioCliente");
@@ -49,69 +47,6 @@ public class FormTelaInicio extends javax.swing.JFrame {
                 jPanel1FocusGained(evt);
             }
         });
-
-        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
-
-        btnCadUsu.setForeground(new java.awt.Color(0, 51, 204));
-        btnCadUsu.setText("Cadastrar Novo Usuario");
-        btnCadUsu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCadUsuMouseClicked(evt);
-            }
-        });
-        btnCadUsu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadUsuActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(btnCadUsu)
-                .addContainerGap(83, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
-                .addComponent(btnCadUsu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
-
-        btnGerenciarUsu1.setForeground(new java.awt.Color(0, 51, 204));
-        btnGerenciarUsu1.setText("Gerenciar Usuarios");
-        btnGerenciarUsu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGerenciarUsu1MouseClicked(evt);
-            }
-        });
-        btnGerenciarUsu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGerenciarUsu1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGerenciarUsu1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGerenciarUsu1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagns/WhatsApp Image 2023-10-28 at 20.40.04.jpeg"))); // NOI18N
 
@@ -142,7 +77,18 @@ public class FormTelaInicio extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel5.setBackground(new java.awt.Color(153, 153, 153));
+        btnCadFun.setForeground(new java.awt.Color(0, 51, 204));
+        btnCadFun.setText("Cadastrar Funcionário");
+        btnCadFun.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCadFunMouseClicked(evt);
+            }
+        });
+        btnCadFun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadFunActionPerformed(evt);
+            }
+        });
 
         btnGerenciarPet.setForeground(new java.awt.Color(0, 51, 204));
         btnGerenciarPet.setText("Gerenciar Pets");
@@ -157,33 +103,29 @@ public class FormTelaInicio extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnGerenciarPet, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(7, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnGerenciarPet, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        btnCadUsu1.setForeground(new java.awt.Color(0, 51, 204));
-        btnCadUsu1.setText("Cadastrar Novo Usuario");
-        btnCadUsu1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCadastrarPet1.setForeground(new java.awt.Color(0, 51, 204));
+        btnCadastrarPet1.setText("Cadastrar Pets");
+        btnCadastrarPet1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCadUsu1MouseClicked(evt);
+                btnCadastrarPet1MouseClicked(evt);
             }
         });
-        btnCadUsu1.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrarPet1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadUsu1ActionPerformed(evt);
+                btnCadastrarPet1ActionPerformed(evt);
+            }
+        });
+
+        btnCadUsu.setForeground(new java.awt.Color(0, 51, 204));
+        btnCadUsu.setText("Cadastrar Cliente");
+        btnCadUsu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCadUsuMouseClicked(evt);
+            }
+        });
+        btnCadUsu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadUsuActionPerformed(evt);
             }
         });
 
@@ -193,49 +135,39 @@ public class FormTelaInicio extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(131, 131, 131))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCadUsu1))
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(45, 45, 45))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(48, 48, 48)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(262, Short.MAX_VALUE)))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(155, 155, 155)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnGerenciarPet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadUsu, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCadFun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadastrarPet1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(64, 64, 64))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCadUsu1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(83, 83, 83)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCadFun, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCadUsu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGerenciarPet, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCadastrarPet1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(151, 151, 151)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(159, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -253,27 +185,6 @@ public class FormTelaInicio extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCadUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadUsuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCadUsuActionPerformed
-
-    private void btnCadUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadUsuMouseClicked
-        FormCadastroCliente objFormFuncionario = new FormCadastroCliente();
-        objFormFuncionario.setVisible(true);
-        objFormFuncionario.setFocusable(true);
-    }//GEN-LAST:event_btnCadUsuMouseClicked
-
-    private void btnGerenciarUsu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGerenciarUsu1MouseClicked
-        FormCadastroPet objFormGerenciamento = new FormCadastroPet();
-        objFormGerenciamento.setVisible(true);
-        this.setFocusable(false);
-        objFormGerenciamento.setFocusable(true);
-    }//GEN-LAST:event_btnGerenciarUsu1MouseClicked
-
-    private void btnGerenciarUsu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarUsu1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGerenciarUsu1ActionPerformed
-
     private void jPanel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusGained
         ClienteDao clienteDao = new ClienteDao();
         clienteDao.criarBanco();
@@ -281,12 +192,10 @@ public class FormTelaInicio extends javax.swing.JFrame {
 
     private void btnGerenciarPetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGerenciarPetMouseClicked
 
-        
         FormGerenciamento objFormGerenciamento = new FormGerenciamento();
         objFormGerenciamento.setVisible(true);
-        
-                        
-      
+
+
     }//GEN-LAST:event_btnGerenciarPetMouseClicked
 
     private void btnGerenciarPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarPetActionPerformed
@@ -299,13 +208,51 @@ public class FormTelaInicio extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnSairMouseClicked
 
-    private void btnCadUsu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadUsu1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCadUsu1MouseClicked
+    
+    private void btnCadFunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadFunMouseClicked
+    FormLogin checagem = new FormLogin();
+     
+     
+    int resultadoLogin = checagem.realizarAutenticacao();
 
-    private void btnCadUsu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadUsu1ActionPerformed
+    if (resultadoLogin == 2) {
+       
+        FormCadastoFuncionario objFormAdminGerente = new FormCadastoFuncionario();
+        objFormAdminGerente.setVisible(true);
+        
+    } else {
+        
+        JOptionPane.showMessageDialog(this, "Credenciais inválidas. Apenas o gerente pode cadastrar funcionários.");
+    }
+
+
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCadUsu1ActionPerformed
+    }//GEN-LAST:event_btnCadFunMouseClicked
+
+    private void btnCadFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadFunActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCadFunActionPerformed
+
+    private void btnCadUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadUsuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCadUsuActionPerformed
+
+    private void btnCadUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadUsuMouseClicked
+        FormCadastroCliente objFormFuncionario = new FormCadastroCliente();
+        objFormFuncionario.setVisible(true);
+        objFormFuncionario.setFocusable(true);
+    }//GEN-LAST:event_btnCadUsuMouseClicked
+
+    private void btnCadastrarPet1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarPet1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCadastrarPet1ActionPerformed
+
+    private void btnCadastrarPet1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarPet1MouseClicked
+        FormCadastroPet objFormGerenciamento = new FormCadastroPet();
+        objFormGerenciamento.setVisible(true);
+        this.setFocusable(false);
+        objFormGerenciamento.setFocusable(true);
+    }//GEN-LAST:event_btnCadastrarPet1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -344,16 +291,13 @@ public class FormTelaInicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadFun;
     private javax.swing.JButton btnCadUsu;
-    private javax.swing.JButton btnCadUsu1;
+    private javax.swing.JButton btnCadastrarPet1;
     private javax.swing.JButton btnGerenciarPet;
-    private javax.swing.JButton btnGerenciarUsu1;
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }

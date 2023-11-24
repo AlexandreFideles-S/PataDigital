@@ -9,6 +9,9 @@ import controller.FuncionarioDao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 
 /**
  *
@@ -166,7 +169,7 @@ public class FormLogin extends javax.swing.JFrame {
         String senha = this.txtSenha.getText();
         
         if(login.equals("admin") && senha.equals("1234")){
-            return 1;
+            return 2;
         }
                 
         try{
@@ -183,6 +186,22 @@ public class FormLogin extends javax.swing.JFrame {
         
         return -1;
     }
+    
+     public int realizarAutenticacao() {
+        int resultadoLogin = checarSenhaELogin();
+
+        if (resultadoLogin == 2) {
+            // Credenciais válidas
+            // Adicione aqui o código para ações após a autenticação bem-sucedida, se necessário
+        } else {
+            // Credenciais inválidas, exibir uma mensagem de erro
+            JOptionPane.showMessageDialog(null, "Credenciais inválidas. Apenas o gerente pode cadastrar funcionários.");
+        }
+        return resultadoLogin;
+    }
+    
+    
+    
     private void abrirFormTelaInicio(){
         FormTelaInicio objTelaInicio = new FormTelaInicio();
         objTelaInicio.setVisible(true);
