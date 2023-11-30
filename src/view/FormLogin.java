@@ -202,8 +202,10 @@ public class FormLogin extends javax.swing.JFrame {
     
     
     
-    private void abrirFormTelaInicio(){
+    private void abrirFormTelaInicio(String login){
         FormTelaInicio objTelaInicio = new FormTelaInicio();
+        
+        objTelaInicio.setLogin( login );
         objTelaInicio.setVisible(true);
         this.setVisible(false);       
     }
@@ -226,10 +228,10 @@ public class FormLogin extends javax.swing.JFrame {
         if(codeKeyPress == 10){
             switch(this.checarSenhaELogin()){
                 case 1:
-                    this.abrirFormAdminGerente();;
+                    this.abrirFormAdminGerente();
                 break;
                 case 2:
-                    this.abrirFormTelaInicio();;
+                    this.abrirFormTelaInicio("");
                 break;
             }
         }
@@ -237,7 +239,8 @@ public class FormLogin extends javax.swing.JFrame {
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
 
-                    this.abrirFormTelaInicio();;
+                    String login = this.txtLogin.getText();
+                    this.abrirFormTelaInicio ( login );
                
     }//GEN-LAST:event_btnLoginMouseClicked
 
@@ -250,6 +253,8 @@ public class FormLogin extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLoginActionPerformed
+
+   
 
     /**
      * @param args the command line arguments

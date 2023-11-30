@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Connection;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -388,41 +390,29 @@ public class FormGerenciamento extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
-this.jTextField1.grabFocus();        // TODO add your handling code here:
+    this.jTextField1.grabFocus();
 
-PetDao p1 = new PetDao();
-
+    PetDao p1 = new PetDao();
 try {
-    
-ResultSet cli = p1.buscarPetsClientes( this.txtCpf.getText() );
+    ResultSet cli = p1.buscartodosPets();
+    DefaultTableModel tab = (DefaultTableModel) this.jTable1.getModel();
 
-    
-
-if ( cli.next() )
-{
-    
-     
-    
-}
-else
-{
-// "Cliente não cliente não encontrado..."
-
-}
+    while (cli.next()) {
+        Object[] linha = {cli.getString("Nome"), cli.getString("Raça"), cli.getString("Nascimento")};
+        tab.addRow(linha);
     }
-catch (SQLException err ) {
 
-} 
-    
-    
+    cli.close();
 
-
+} catch (SQLException err) {
+    JOptionPane.showMessageDialog(null, err.getMessage());
+}
 
 
 
     }//GEN-LAST:event_formWindowOpened
 
-/**
+/*
  * @param args the command line arguments
  */
     
