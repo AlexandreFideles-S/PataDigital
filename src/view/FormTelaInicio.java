@@ -42,6 +42,8 @@ public class FormTelaInicio extends javax.swing.JFrame {
         btnGerenciarPet = new javax.swing.JButton();
         btnCadastrarPet1 = new javax.swing.JButton();
         btnCadUsu = new javax.swing.JButton();
+        btnCadUsu1 = new javax.swing.JButton();
+        btnCadUsu2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("InicioCliente");
@@ -139,6 +141,32 @@ public class FormTelaInicio extends javax.swing.JFrame {
             }
         });
 
+        btnCadUsu1.setForeground(new java.awt.Color(0, 51, 204));
+        btnCadUsu1.setText("Gerenciar Funcionário");
+        btnCadUsu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCadUsu1MouseClicked(evt);
+            }
+        });
+        btnCadUsu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadUsu1ActionPerformed(evt);
+            }
+        });
+
+        btnCadUsu2.setForeground(new java.awt.Color(0, 51, 204));
+        btnCadUsu2.setText("Gerenciar Cliente");
+        btnCadUsu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCadUsu2MouseClicked(evt);
+            }
+        });
+        btnCadUsu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadUsu2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -153,17 +181,23 @@ public class FormTelaInicio extends javax.swing.JFrame {
                 .addGap(102, 102, 102)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnGerenciarPet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCadUsu, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
+                    .addComponent(btnCadUsu, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                    .addComponent(btnCadUsu2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCadFun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCadastrarPet1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCadastrarPet1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadUsu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(64, 64, 64))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCadUsu1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCadUsu2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadFun, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCadUsu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -268,6 +302,26 @@ public class FormTelaInicio extends javax.swing.JFrame {
            }
     }//GEN-LAST:event_formWindowOpened
 
+    private void btnCadUsu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadUsu1MouseClicked
+        FormGerenciamentoFuncionario objFormGerenciamentoFuncionario = new FormGerenciamentoFuncionario();
+        objFormGerenciamentoFuncionario.setVisible(true);
+        objFormGerenciamentoFuncionario.setFocusable(true);
+    }//GEN-LAST:event_btnCadUsu1MouseClicked
+
+    private void btnCadUsu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadUsu1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCadUsu1ActionPerformed
+
+    private void btnCadUsu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadUsu2MouseClicked
+        FormGerenciamentoCliente objFormGerenciamentoCliente = new FormGerenciamentoCliente();
+        objFormGerenciamentoCliente.setVisible(true);
+        objFormGerenciamentoCliente.setFocusable(true);
+    }//GEN-LAST:event_btnCadUsu2MouseClicked
+
+    private void btnCadUsu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadUsu2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCadUsu2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -307,6 +361,8 @@ public class FormTelaInicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadFun;
     private javax.swing.JButton btnCadUsu;
+    private javax.swing.JButton btnCadUsu1;
+    private javax.swing.JButton btnCadUsu2;
     private javax.swing.JButton btnCadastrarPet1;
     private javax.swing.JButton btnGerenciarPet;
     private javax.swing.JButton btnSair;
