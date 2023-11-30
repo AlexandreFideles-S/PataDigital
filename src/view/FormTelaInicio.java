@@ -297,8 +297,8 @@ public class FormTelaInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarPet1MouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-         if (!login.equals("admin")) {
-                this.btnCadFun.setVisible(false);
+         if (login.equals("admin")) {
+                this.btnCadFun.setVisible(true);
            }
     }//GEN-LAST:event_formWindowOpened
 
