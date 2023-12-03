@@ -252,21 +252,12 @@ public class FormTelaInicio extends javax.swing.JFrame {
 
     
     private void btnCadFunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadFunMouseClicked
-    FormLogin checagem = new FormLogin();
+    
      
-     
-    int resultadoLogin = checagem.realizarAutenticacao();
 
-    if (resultadoLogin == 2) {
-       
         FormCadastoFuncionario objFormAdminGerente = new FormCadastoFuncionario();
         objFormAdminGerente.setVisible(true);
         
-    } else {
-        
-        JOptionPane.showMessageDialog(this, "Credenciais inválidas. Apenas o gerente pode cadastrar funcionários.");
-    }
-
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCadFunMouseClicked
@@ -297,9 +288,9 @@ public class FormTelaInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarPet1MouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-         if (login.equals("admin")) {
-                this.btnCadFun.setVisible(true);
-           }
+        if (!login.equalsIgnoreCase("admin")) {
+            this.btnCadFun.setVisible(false);
+       }
     }//GEN-LAST:event_formWindowOpened
 
     private void btnCadUsu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadUsu1MouseClicked

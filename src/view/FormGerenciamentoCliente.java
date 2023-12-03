@@ -4,6 +4,13 @@
  */
 package view;
 
+import controller.ClienteDao;
+import controller.PetDao;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author 55119
@@ -42,7 +49,11 @@ public class FormGerenciamentoCliente extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         btnVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel5.setBackground(new java.awt.Color(252, 237, 226));
 
@@ -139,9 +150,7 @@ public class FormGerenciamentoCliente extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Nome", "CPF"
@@ -198,13 +207,10 @@ public class FormGerenciamentoCliente extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(44, 44, 44)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -261,7 +267,6 @@ public class FormGerenciamentoCliente extends javax.swing.JFrame {
 
     private void jFrame1formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jFrame1formWindowOpened
 
-       
     }//GEN-LAST:event_jFrame1formWindowOpened
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -277,7 +282,26 @@ public class FormGerenciamentoCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProcurarPetActionPerformed
 
     private void btnProcurarPetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProcurarPetMouseClicked
-        // TODO add your handling code here:
+        
+        this.jTextField1.grabFocus();
+
+        ClienteDao p1 = new ClienteDao();
+        try {
+            ResultSet cli = p1.buscarClienteByCpf(this.txtCpf.getText());
+            DefaultTableModel tab = (DefaultTableModel) this.jTable1.getModel();
+            
+            tab.setRowCount(0);
+
+            while (cli.next()) {
+                Object[] linha = {cli.getString("ds_nome"), cli.getString("ds_cpf")};
+                tab.addRow(linha);
+            }
+
+            cli.close();
+
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, err.getMessage());
+        }
     }//GEN-LAST:event_btnProcurarPetMouseClicked
 
     private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
@@ -287,6 +311,26 @@ public class FormGerenciamentoCliente extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.jTextField1.grabFocus();
+
+        ClienteDao p1 = new ClienteDao();
+        try {
+            ResultSet cli = p1.buscarTodosClientes();
+            DefaultTableModel tab = (DefaultTableModel) this.jTable1.getModel();
+
+            while (cli.next()) {
+                Object[] linha = {cli.getString("ds_nome"), cli.getString("ds_cpf")};
+                tab.addRow(linha);
+            }
+
+            cli.close();
+
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, err.getMessage());
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

@@ -721,9 +721,9 @@ public class FormCadastroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnInserirCadastroClienteActionPerformed
 
-    private void abrirFormLogin(){
-        FormLogin objFormLogin = new FormLogin();
-        objFormLogin.setVisible(true);
+    private void abrirFormInicio(){
+        FormTelaInicio objFormInicio = new FormTelaInicio();
+        objFormInicio.setVisible(true);
         this.setVisible(false);
     }
     
@@ -778,7 +778,7 @@ public class FormCadastroCliente extends javax.swing.JFrame {
                 enderecoDao.incluirEnderecoCliente(endereco);
                 
                 JOptionPane.showMessageDialog(null,"Usuário inserido com sucesso.");
-                this.abrirFormLogin();
+                this.abrirFormInicio();
             } else{
                 JOptionPane.showMessageDialog(null,"Id de usuário inválido, ou não encontrado.");
             }

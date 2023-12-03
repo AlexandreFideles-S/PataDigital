@@ -726,8 +726,6 @@ public class FormCadastoFuncionario extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jPanel20.setBackground(new java.awt.Color(252, 237, 226));
         jPanel20.setForeground(new java.awt.Color(20, 205, 194));
 

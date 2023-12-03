@@ -28,6 +28,33 @@ public class FuncionarioDao extends ConectarDao {
         }
     }
     
+    public ResultSet buscarTodos (){
+        sql = "SELECT * FROM TB_FUNCIONARIO";
+        
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet resul = ps.executeQuery();
+            return resul;
+        } catch(SQLException err){
+            JOptionPane.showMessageDialog(null, err.getMessage());
+            return null;
+        }
+    }
+    
+    public ResultSet buscarFuncionarioeByCpf(String cpf) {
+        sql = "SELECT * FROM TB_FUNCIONARIO WHERE DS_CPF = ?";
+
+        try{        
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, cpf);
+            
+            return ps.executeQuery();
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar usuário!" + err.getMessage());
+            return null;
+        }
+    }
+    
     public void incluir(Funcionario obj){
         sql = "INSERT INTO TB_FUNCIONARIO (DS_NOME, DS_CPF, DS_CELULAR, DS_TELEFONE, DS_EMAIL, DS_SENHA, TG_INATIVO, DS_LOGIN, DS_PERMISAO) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";

@@ -4,6 +4,14 @@
  */
 package view;
 
+
+import controller.ClienteDao;
+import controller.FuncionarioDao;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author 55119
@@ -502,7 +510,11 @@ public class FormGerenciamentoFuncionario extends javax.swing.JFrame {
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel12.setBackground(new java.awt.Color(252, 237, 226));
 
@@ -599,9 +611,7 @@ public class FormGerenciamentoFuncionario extends javax.swing.JFrame {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Nome", "CPF"
@@ -773,7 +783,26 @@ public class FormGerenciamentoFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCpf2ActionPerformed
 
     private void btnProcurarPet2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProcurarPet2MouseClicked
-        // TODO add your handling code here:
+        this.jTextField3.grabFocus();
+
+        FuncionarioDao p1 = new FuncionarioDao();
+        try {
+            ResultSet cli = p1.buscarFuncionarioeByCpf(this.txtCpf2.getText());
+            DefaultTableModel tab = (DefaultTableModel) this.jTable3.getModel();
+            
+            tab.setRowCount(0);
+
+            while (cli.next()) {
+                Object[] linha = {cli.getString("ds_nome"), cli.getString("ds_cpf")};
+                tab.addRow(linha);
+            }
+
+            cli.close();
+
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, err.getMessage());
+        }
+
     }//GEN-LAST:event_btnProcurarPet2MouseClicked
 
     private void btnProcurarPet2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcurarPet2ActionPerformed
@@ -787,6 +816,26 @@ public class FormGerenciamentoFuncionario extends javax.swing.JFrame {
     private void btnVoltar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltar2ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+         this.jTextField3.grabFocus();
+
+        FuncionarioDao p1 = new FuncionarioDao();
+        try {
+            ResultSet cli = p1.buscarTodos();
+            DefaultTableModel tab = (DefaultTableModel) this.jTable3.getModel();
+
+            while (cli.next()) {
+                Object[] linha = {cli.getString("ds_nome"), cli.getString("ds_cpf")};
+                tab.addRow(linha);
+            }
+
+            cli.close();
+
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, err.getMessage());
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

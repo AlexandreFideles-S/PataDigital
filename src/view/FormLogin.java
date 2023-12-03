@@ -5,6 +5,7 @@
 package view;
 
 
+import controller.ConectarDao;
 import controller.FuncionarioDao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -187,22 +188,11 @@ public class FormLogin extends javax.swing.JFrame {
         return -1;
     }
     
-     public int realizarAutenticacao() {
-        int resultadoLogin = checarSenhaELogin();
-
-        if (resultadoLogin == 2) {
-            // Credenciais válidas
-            // Adicione aqui o código para ações após a autenticação bem-sucedida, se necessário
-        } else {
-            // Credenciais inválidas, exibir uma mensagem de erro
-            JOptionPane.showMessageDialog(null, "Credenciais inválidas. Apenas o gerente pode cadastrar funcionários.");
-        }
-        return resultadoLogin;
-    }
-    
     
     
     private void abrirFormTelaInicio(String login){
+        ConectarDao conectarDao = new ConectarDao();
+        conectarDao.criarBanco();
         FormTelaInicio objTelaInicio = new FormTelaInicio();
         
         objTelaInicio.setLogin( login );
@@ -253,8 +243,6 @@ public class FormLogin extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLoginActionPerformed
-
-   
 
     /**
      * @param args the command line arguments

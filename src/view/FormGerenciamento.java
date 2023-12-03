@@ -55,7 +55,6 @@ public class FormGerenciamento extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         btnVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(0, 0, 0));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -219,12 +218,10 @@ public class FormGerenciamento extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Nome", "Raça", "Nascimento"
+                "Nome", "Raça", "CPF"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -372,7 +369,26 @@ public class FormGerenciamento extends javax.swing.JFrame {
 
  
     private void btnProcurarPetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProcurarPetMouseClicked
-        // TODO add your handling code here:
+        this.jTextField1.grabFocus();
+
+        PetDao p1 = new PetDao();
+        try {
+            ResultSet cli = p1.buscarPetsClientes(this.txtCpf.getText());
+            DefaultTableModel tab = (DefaultTableModel) this.jTable1.getModel();
+            
+            tab.setRowCount(0);
+
+            while (cli.next()) {
+                Object[] linha = {cli.getString("ds_nome"), cli.getString("ds_raca"),cli.getString("ds_cpf")};
+                tab.addRow(linha);
+            }
+
+            cli.close();
+
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, err.getMessage());
+        }
+
    
     }//GEN-LAST:event_btnProcurarPetMouseClicked
 
@@ -394,7 +410,7 @@ try {
     DefaultTableModel tab = (DefaultTableModel) this.jTable1.getModel();
 
     while (cli.next()) {
-        Object[] linha = {cli.getString("Nome"), cli.getString("Raça"), cli.getString("Nascimento")};
+        Object[] linha = {cli.getString("ds_nome"), cli.getString("ds_raca"), cli.getString("ds_cpf")};
         tab.addRow(linha);
     }
 

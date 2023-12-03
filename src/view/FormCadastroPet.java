@@ -4,6 +4,17 @@
  */
 package view;
 
+import controller.ClienteDao;
+import controller.PetDao;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import model.Cliente;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import model.Pet;
+
 /**
  *
  * @author Fideles
@@ -32,13 +43,13 @@ public class FormCadastroPet extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jTextField5 = new javax.swing.JTextField();
+        ComboBoxRaca = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
+        txtDtNascimento = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        jTextField6 = new javax.swing.JTextField();
+        txtCpf = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         btnCadastrar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -63,18 +74,20 @@ public class FormCadastroPet extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1)
+                .addComponent(txtNome)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 153));
+
+        ComboBoxRaca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Negra", "Parda", "Amarela", "Ind gena", "Mulata", "Cafuza", "Cabocla", "Japonesa", "Mesti a", "Branca", " " }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -82,22 +95,22 @@ public class FormCadastroPet extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(ComboBoxRaca, 0, 186, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(ComboBoxRaca, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(153, 153, 153));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtDtNascimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtDtNascimentoActionPerformed(evt);
             }
         });
 
@@ -107,22 +120,22 @@ public class FormCadastroPet extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                .addComponent(txtDtNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(153, 153, 153));
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        txtCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                txtCpfActionPerformed(evt);
             }
         });
 
@@ -132,14 +145,14 @@ public class FormCadastroPet extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField6)
+                .addComponent(txtCpf)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -147,6 +160,11 @@ public class FormCadastroPet extends javax.swing.JFrame {
 
         btnCadastrar.setForeground(new java.awt.Color(0, 51, 204));
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCadastrarMouseClicked(evt);
+            }
+        });
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
@@ -261,11 +279,9 @@ public class FormCadastroPet extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addGap(26, 26, 26))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
@@ -293,13 +309,13 @@ public class FormCadastroPet extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtDtNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDtNascimentoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtDtNascimentoActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_txtCpfActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
@@ -308,6 +324,42 @@ public class FormCadastroPet extends javax.swing.JFrame {
     private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
         this.setVisible(false);  
     }//GEN-LAST:event_btnVoltarMouseClicked
+
+    private void btnCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseClicked
+        Pet pet = new Pet();
+        PetDao petdao = new PetDao();
+        
+        ClienteDao p1 = new ClienteDao();
+        try {
+            ResultSet cli = p1.buscarClienteByCpf(this.txtCpf.getText());
+            while(cli.next()){
+                int fkCliente = cli.getInt("Id_cliente");
+
+                pet.setFK_CLIENTE(fkCliente); 
+            }
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, err.getMessage());
+        }
+        pet.setFK_RACA(this.ComboBoxRaca.getSelectedIndex() + 1);
+        
+        
+        pet.setDS_NOME(this.txtNome.getText());
+        
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataFormatada; 
+        try {
+            dataFormatada = formato.parse(this.txtDtNascimento.getText());
+            pet.setDT_NASCIMENTO(dataFormatada);
+            
+            petdao.incluir(pet);
+            JOptionPane.showMessageDialog(null,"Pet inserido com sucesso");
+        
+            
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null,"Não foi possível converter a data de nascimento do cliente");
+        }
+        
+    }//GEN-LAST:event_btnCadastrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -345,6 +397,7 @@ public class FormCadastroPet extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ComboBoxRaca;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
@@ -359,9 +412,8 @@ public class FormCadastroPet extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField txtCpf;
+    private javax.swing.JTextField txtDtNascimento;
+    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }
